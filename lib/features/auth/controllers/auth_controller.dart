@@ -46,4 +46,36 @@ class AuthController extends GetxController {
       loading();
     }
   }
+
+  Future<Either<AppFailure, User>> registerUser({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    loading();
+    try {
+      final request = await http.post(
+        Uri.parse('$apiUrl/register'),
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: {
+          'name' : name,
+          'email' : email,
+          'password': password,
+        },
+      );
+      final response = jsonDecode(request.body) as Map<String, dynamic>;
+      if(response['status'] != true) {
+        print(response);
+        return Left(AppFailure(response['error'] ?? 'Failed to register user', response['errors']));
+      }
+      return Right(User.fromJson(response['user']));
+    }catch(e) {
+      print(e.toString());
+      return Left(AppFailure(e.toString()));
+    }finally {
+      loading();
+    }
+  }
 }

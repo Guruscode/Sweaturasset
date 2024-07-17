@@ -98,13 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const ForgotPasswordScreen(),
-                              ),
-                            );
+                            Get.to(() => const RegisterScreen());
                           },
                           child: Text(
                             'Forgot password?',
@@ -144,10 +138,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                             .join('\n') ??
                                         failure.message;
                                     Get.snackbar('Error', errorMessages,
-                                        backgroundColor: blueColor,
+                                        backgroundColor: orangeColor,
                                         colorText: Colors.white);
                                   }, (success) {
-                                    Get.snackbar('Success', 'hi');
+                                    Get.to(() => const AppBottomBar());
+                                    Get.snackbar(
+                                      'Success',
+                                      'Welcome back!',
+                                      backgroundColor: blueColor,
+                                      colorText: Colors.white,
+                                    );
                                   });
                                 },
                               );

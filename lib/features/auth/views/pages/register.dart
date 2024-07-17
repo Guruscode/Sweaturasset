@@ -1,7 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:swa/core/constants/colors.dart';
+import 'package:swa/core/constants/loading_widget.dart';
+import 'package:swa/features/auth/controllers/auth_controller.dart';
 import 'package:swa/features/auth/views/pages/login.dart';
 import 'package:swa/features/auth/views/widgets/button_widget.dart';
 import 'package:swa/features/auth/views/widgets/input_field_widget.dart';
@@ -16,6 +19,13 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final AuthController authController = Get.put(AuthController());
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,65 +64,112 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     SizedBox(height: 20.h),
                     InputFieldWidget(
+                      text: 'Name',
+                      controller: nameController,
+                      hintText: 'John Doe',
+                    ),
+                    SizedBox(height: 20.h),
+                    InputFieldWidget(
                       text: 'Email',
-                      controller: TextEditingController(),
+                      controller: emailController,
                       hintText: 'email@example.com',
                     ),
                     SizedBox(height: 20.h),
                     InputFieldWidget(
                       isPassword: true,
                       text: 'Password',
-                      controller: TextEditingController(),
+                      controller: passwordController,
                       hintText: '************',
                     ),
                     SizedBox(height: 20.h),
                     InputFieldWidget(
                       isPassword: true,
                       text: 'Confirm Password',
-                      controller: TextEditingController(),
+                      controller: confirmPasswordController,
                       hintText: '************',
                     ),
                     SizedBox(
                       height: 20.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Already have an account?',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.grey.shade500,
-                            ),
+                    InkWell(
+                      onTap: () {
+                        print('clicked');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
                           ),
+                        );
+                      },
+                      child: Text(
+                        'Already have an account?',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Colors.grey.shade500,
                         ),
-                      ],
+                      ),
                     ),
                     SizedBox(
                       height: 20.h,
                     ),
-                    ButtonWidget(
-                      text: 'Create an account',
-                      textColor: Colors.white,
-                      bgColor: blueColor,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AppBottomBar(),
-                          ),
-                        );
-                      },
-                    ),
+                    GetBuilder<AuthController>(
+                        init: authController,
+                        builder: (controller) {
+                          return controller.isLoading
+                              ? const Center(
+                                  child: LoadingWidget(),
+                                )
+                              : ButtonWidget(
+                                  text: 'Create an account',
+                                  textColor: Colors.white,
+                                  bgColor: blueColor,
+                                  onPressed: () async {
+                                    if (passwordController.text ==
+                                        confirmPasswordController.text) {
+                                      final result =
+                                          await controller.registerUser(
+                                        name: nameController.text.trim(),
+                                        email: emailController.text.trim(),
+                                        password:
+                                            passwordController.text.trim(),
+                                      );
+
+                                      result.fold(
+                                        (failure) {
+                                          final errorMessages = failure
+                                                  .errors?.entries
+                                                  .map((e) =>
+                                                      '${e.key}: ${e.value.join(', ')}')
+                                                  .join('\n') ??
+                                              failure.message;
+                                          Get.snackbar('Error', errorMessages,
+                                              backgroundColor: orangeColor,
+                                              colorText: Colors.white);
+                                        },
+                                        (success) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => const LoginScreen(),
+                                            ),
+                                          );
+                                          Get.snackbar(
+                                            'Success',
+                                            'Account Created, Login!',
+                                            backgroundColor: blueColor,
+                                            colorText: Colors.white,
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      Get.snackbar(
+                                          'Error', 'Password doesnt match',
+                                          backgroundColor: orangeColor,
+                                          colorText: Colors.white);
+                                    }
+                                  },
+                                );
+                        }),
                     SizedBox(
                       height: 20.h,
                     ),
