@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:swa/constants/colors.dart';
+import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/dashboard/views/pages/calculator_page.dart';
 import 'package:swa/features/dashboard/views/pages/home_page.dart';
 import 'package:swa/features/dashboard/views/pages/resources_page.dart';

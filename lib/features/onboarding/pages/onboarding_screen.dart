@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:swa/constants/colors.dart';
+import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/auth/views/pages/login.dart';
 import 'package:swa/features/onboarding/widgets/onboard_widget.dart';
 

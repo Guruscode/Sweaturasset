@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:swa/constants/colors.dart';
+import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/dashboard/views/widgets/read_more_button.dart';
 
 class ReadCardWidget extends StatelessWidget {

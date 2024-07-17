@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_faq/flutter_easy_faq.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:swa/constants/colors.dart';
+import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/auth/views/pages/forgot_password.dart';
 import 'package:swa/features/dashboard/views/widgets/input_field_widget.dart';
 import 'package:swa/features/dashboard/views/widgets/read_more_button.dart';
