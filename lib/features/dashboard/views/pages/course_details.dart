@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swa/core/constants/colors.dart';
+import 'package:swa/core/models/courses.dart';
 import 'package:swa/features/dashboard/views/widgets/read_more_button.dart';
 import 'package:swa/features/dashboard/views/widgets/section_widget.dart';
 import 'package:swa/features/dashboard/views/widgets/video_list_widget.dart';
+import 'package:swa/features/payment/views/payment_screen.dart';
 
 class CourseDetails extends StatefulWidget {
-  const CourseDetails({super.key});
+  final CoursesModel model;
+
+  const CourseDetails({super.key, required this.model});
 
   @override
   State<CourseDetails> createState() => _CourseDetailsState();
@@ -79,7 +84,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Financial Planning Course',
+                    widget.model.name ?? '',
                     style: GoogleFonts.cabin(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -102,7 +107,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'N1000',
+                              'N${widget.model.price.toString()}',
                               style: TextStyle(
                                 fontSize: 23.sp,
                                 fontWeight: FontWeight.bold,
@@ -141,7 +146,11 @@ class _CourseDetailsState extends State<CourseDetails> {
                           width: 110.w,
                           child: ReadMoreButtonWidget(
                             bgColor: blueColor,
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(
+                                () => PaymentPage(course: widget.model),
+                              );
+                            },
                             text: 'Buy now',
                             textColor: Colors.white,
                           ),
@@ -166,7 +175,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                     height: 10.h,
                   ),
                   Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim nisl, adipiscing sed odio rhoncus, etiam auctor aliquam. Semper mi nibh tortor est molestie. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim nisl, adipiscing sed odio rhoncus.',
+                    widget.model.overview ?? '',
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey.shade800,
@@ -203,7 +212,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                               width: 10.w,
                             ),
                             Text(
-                              'English',
+                              'Language: ${widget.model.language!.capitalize}',
                               style: TextStyle(fontSize: 14.sp),
                             ),
                           ],
@@ -213,14 +222,14 @@ class _CourseDetailsState extends State<CourseDetails> {
                         ),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.video_library_outlined,
                             ),
                             SizedBox(
                               width: 10.w,
                             ),
                             Text(
-                              '07 lessons (1hr 35 min)',
+                              '${widget.model.numberOfLessons} lessons (${widget.model.hours} hours)',
                               style: TextStyle(fontSize: 14.sp),
                             ),
                           ],
@@ -245,9 +254,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                     height: 70.h,
                     width: double.infinity,
                     child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: 6,
+                      itemCount: widget.model.whatYouWillLearn!.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Padding(
@@ -268,8 +277,8 @@ class _CourseDetailsState extends State<CourseDetails> {
                                 SizedBox(
                                   width: 10.w,
                                 ),
-                                Text(
-                                    'Lorem ipsum dolor sit amet,\n consectetur adipiscing elit.')
+                                Text(widget.model.whatYouWillLearn?[index] ??
+                                    ''),
                               ],
                             ),
                           ),
@@ -293,115 +302,67 @@ class _CourseDetailsState extends State<CourseDetails> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  const SectionWidget(
-                    section: 'Section 01',
-                    title: 'Introduction',
-                    time: '25 min',
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: widget.model.curriculums?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return widget.model.curriculums!.isEmpty
+                          ? const SizedBox(
+                              child: Center(
+                                child: Text(
+                                  'Curriculum content coming soon...',
+                                ),
+                              ),
+                            )
+                          : Column(
+                              children: [
+                                SectionWidget(
+                                  section: widget.model.curriculums![index]
+                                          .sectionName ??
+                                      '',
+                                  title: widget.model.curriculums![index]
+                                          .sectionTitle ??
+                                      '',
+                                  time: '25 min',
+                                ),
+                                // ListView.builder(
+                                //   shrinkWrap: true,
+                                //   itemCount: widget.model.curriculums![index]
+                                //       .contents!.length,
+                                //   itemBuilder: (context, index) {
+                                //     print(
+                                //         "Length: ${widget.model.curriculums![index].contents![index].title}");
+                                //     return widget.model.curriculums![index]
+                                //             .contents!.isEmpty
+                                //         ? const SizedBox(
+                                //             child: Center(
+                                //               child: Text(
+                                //                 'Section content coming soon...',
+                                //               ),
+                                //             ),
+                                //           )
+                                //         : VideoListWidget(
+                                //             number: widget
+                                //                 .model
+                                //                 .curriculums![index]
+                                //                 .contents![index]
+                                //                 .id
+                                //                 .toString(),
+                                //             title: widget
+                                //                     .model
+                                //                     .curriculums![index]
+                                //                     .contents![index]
+                                //                     .title ??
+                                //                 '',
+                                //           );
+                                //   },
+                                // ),
+                              ],
+                            );
+                    },
                   ),
                   SizedBox(
                     height: 20.h,
-                  ),
-                  VideoListWidget(
-                    number: '01',
-                    isLocked: false,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Divider(
-                    color: blueColor.withOpacity(0.3),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  VideoListWidget(
-                    number: '02',
-                    isLocked: false,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Divider(
-                    color: blueColor.withOpacity(0.3),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  const SectionWidget(
-                    section: 'Section 02',
-                    title: 'Graphic design',
-                    time: '25 min',
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  VideoListWidget(
-                    number: '03',
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Divider(
-                    color: blueColor.withOpacity(0.3),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  VideoListWidget(
-                    number: '04',
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Divider(
-                    color: blueColor.withOpacity(0.3),
-                  ),
-                  VideoListWidget(
-                    number: '05',
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Divider(
-                    color: blueColor.withOpacity(0.3),
-                  ),
-                  VideoListWidget(
-                    number: '06',
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Divider(
-                    color: blueColor.withOpacity(0.3),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  const SectionWidget(
-                    section: 'Section 03',
-                    title: "Let's practice",
-                    time: '25 min',
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  VideoListWidget(
-                    number: '07',
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Divider(
-                    color: blueColor.withOpacity(0.3),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  VideoListWidget(
-                    number: '08',
-                  ),
-                  SizedBox(
-                    height: 10.h,
                   ),
                 ],
               ),

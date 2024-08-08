@@ -4,8 +4,10 @@ import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/dashboard/views/widgets/read_more_button.dart';
 
 class CalculateBannerWidget extends StatelessWidget {
+  final VoidCallback? onTap;
   const CalculateBannerWidget({
     super.key,
+    this.onTap,
   });
 
   @override
@@ -60,7 +62,7 @@ class CalculateBannerWidget extends StatelessWidget {
                 height: 30.h,
                 child: ReadMoreButtonWidget(
                   bgColor: orangeColor,
-                  onPressed: () {},
+                  onPressed: onTap ?? () {},
                   text: 'Continue',
                   textColor: Colors.white,
                   roundedSize: 20,

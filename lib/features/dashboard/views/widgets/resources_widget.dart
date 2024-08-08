@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:swa/core/constants/colors.dart';
+import 'package:swa/core/models/courses.dart';
 
 class ResourcesWidget extends StatelessWidget {
   final bool isCompleted;
   final bool downloaded;
+  final CoursesModel course;
 
   const ResourcesWidget({
     super.key,
     this.isCompleted = false,
-    this.downloaded = false,
+    this.downloaded = false, required this.course,
   });
 
   @override
@@ -54,7 +56,7 @@ class ResourcesWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Article',
+                            'Course',
                             style: TextStyle(
                               fontSize: 12.sp,
                               color: const Color(
@@ -77,7 +79,7 @@ class ResourcesWidget extends StatelessWidget {
                                     ),
                                   ),
                                   child: Text(
-                                    'Free',
+                                    'Paid',
                                     style: TextStyle(
                                       fontSize: 12.sp,
                                       color: blueColor,
@@ -89,7 +91,7 @@ class ResourcesWidget extends StatelessWidget {
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        'Financial planning',
+                        course.name ?? '',
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
@@ -112,7 +114,7 @@ class ResourcesWidget extends StatelessWidget {
                           ? Container()
                           : Row(
                               children: [
-                                const Text('4 mins read'),
+                                Text("${course.hours.toString()} hours"),
                                 const VerticalDivider(
                                   color: Colors.black,
                                   thickness: 1,

@@ -10,9 +10,29 @@ import 'package:swa/core/models/user.dart';
 class AuthController extends GetxController {
   bool isLoading = false;
 
+  final _isLoggedIn = false.obs;
+  final _token = ''.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadToken();
+  }
+
   void loading() {
     isLoading =!isLoading;
     update();
+  }
+  
+  bool get isLoggedIn => _isLoggedIn.value;
+  String get token => _token.value;
+
+  Future<void> _loadToken() async {
+    String? storedToken = box.read('token');
+    if (storedToken != null && storedToken.isNotEmpty) {
+      _token.value = storedToken;
+      _isLoggedIn.value = true;
+    }
   }
 
   Future<Either<AppFailure, User>> loginUser({
@@ -51,6 +71,7 @@ class AuthController extends GetxController {
     required String name,
     required String email,
     required String password,
+    required String confirm_password,
   }) async {
     loading();
     try {
@@ -63,6 +84,7 @@ class AuthController extends GetxController {
           'name' : name,
           'email' : email,
           'password': password,
+          'password_confirmation': confirm_password,
         },
       );
       final response = jsonDecode(request.body) as Map<String, dynamic>;

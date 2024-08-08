@@ -132,6 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         email: emailController.text.trim(),
                                         password:
                                             passwordController.text.trim(),
+                                            confirm_password: confirmPasswordController.text.trim()
                                       );
 
                                       result.fold(

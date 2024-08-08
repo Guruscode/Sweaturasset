@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/auth/views/pages/login.dart';
+import 'package:swa/features/dashboard/controllers/logout_controller.dart';
 import 'package:swa/features/dashboard/views/pages/change_password.dart';
 import 'package:swa/features/dashboard/views/pages/edit_profile.dart';
 import 'package:swa/features/dashboard/views/pages/help_and_support.dart';
@@ -18,6 +20,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final LogoutController logoutController = Get.put(LogoutController());
   bool notificationSwitch = false;
   bool updatesSwitch = false;
 
@@ -25,80 +28,80 @@ class _SettingsPageState extends State<SettingsPage> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          color: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.all(20.sp),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    'Logout',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                Center(
-                  child: Text(
-                    'Are you sure you want to logout?',
-                    style: TextStyle(fontSize: 16.sp),
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return GetBuilder<LogoutController>(
+          init: logoutController,
+          builder: (controller) {
+            return Container(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(20.sp),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              8.sp,
-                            ),
-                            side: BorderSide(
-                              color: blueColor,
-                            ),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context); // Close bottom sheet
-                        },
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: blueColor,
-                          ),
+                    Center(
+                      child: Text(
+                        'Logout',
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
                         ),
                       ),
                     ),
-                    SizedBox(width: 30.w),
-                    Expanded(
-                      child: ReadMoreButtonWidget(
-                        bgColor: blueColor,
-                        text: 'Yes, Log out',
-                        textColor: Colors.white,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
-                          );
-                        },
+                    SizedBox(height: 20.h),
+                    Center(
+                      child: Text(
+                        'Are you sure you want to logout?',
+                        style: TextStyle(fontSize: 16.sp),
                       ),
+                    ),
+                    SizedBox(height: 20.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  8.sp,
+                                ),
+                                side: BorderSide(
+                                  color: blueColor,
+                                ),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context); // Close bottom sheet
+                            },
+                            child: Text(
+                              'Cancel',
+                              style: TextStyle(
+                                color: blueColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 30.w),
+                        Expanded(
+                          child: ReadMoreButtonWidget(
+                            bgColor: blueColor,
+                            text: 'Yes, Log out',
+                            textColor: Colors.white,
+                            onPressed: () async {
+                              await controller.logoutUser();
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          }
         );
       },
     );

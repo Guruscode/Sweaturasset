@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:swa/core/constants/colors.dart';
+import 'package:swa/features/dashboard/controllers/course_controller.dart';
 import 'package:swa/features/dashboard/views/pages/course_details.dart';
 import 'package:swa/features/dashboard/views/widgets/resources_widget.dart';
 
@@ -14,6 +16,7 @@ class ResourcesPage extends StatefulWidget {
 class _ResourcesPageState extends State<ResourcesPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+  final CourseController courseController = Get.put(CourseController());
 
   @override
   void initState() {
@@ -86,66 +89,53 @@ class _ResourcesPageState extends State<ResourcesPage>
                 child: TabBarView(
                   controller: tabController,
                   children: [
-                    ListView(
-                      shrinkWrap: true,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CourseDetails(),
-                              ),
-                            );
-                          },
-                          child: ResourcesWidget(),
-                        ),
-                        ResourcesWidget(),
-                        ResourcesWidget(),
-                        ResourcesWidget(),
-                        ResourcesWidget(),
-                        ResourcesWidget(),
-                      ],
+                    GetBuilder<CourseController>(
+                      init: courseController,
+                      builder: (controller) {
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: controller.courses.value.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  Get.to(
+                                    () => CourseDetails(
+                                      model: controller.courses[index],
+                                    ),
+                                  );
+                                },
+                                child: ResourcesWidget(
+                                  course: controller.courses[index],
+                                ),
+                              );
+                            });
+                      },
+                    ),
+                    GetBuilder<CourseController>(
+                      init: courseController,
+                      builder: (controller) {
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: controller.courses.value.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  Get.to(
+                                        () => CourseDetails(
+                                      model: controller.courses[index],
+                                    ),
+                                  );
+                                },
+                                child: ResourcesWidget(
+                                  isCompleted: true,
+                                  course: controller.courses[index],
+                                ),
+                              );
+                            });
+                      },
                     ),
                     ListView(
                       shrinkWrap: true,
-                      children: const [
-                        ResourcesWidget(
-                          isCompleted: true,
-                        ),
-                        ResourcesWidget(
-                          isCompleted: true,
-                        ),
-                        ResourcesWidget(
-                          isCompleted: true,
-                        ),
-                        ResourcesWidget(
-                          isCompleted: true,
-                        ),
-                        ResourcesWidget(
-                          isCompleted: true,
-                        ),
-                      ],
-                    ),
-                    ListView(
-                      shrinkWrap: true,
-                      children: const [
-                        ResourcesWidget(
-                          downloaded: true,
-                        ),
-                        ResourcesWidget(
-                          downloaded: true,
-                        ),
-                        ResourcesWidget(
-                          downloaded: true,
-                        ),
-                        ResourcesWidget(
-                          downloaded: true,
-                        ),
-                        ResourcesWidget(
-                          downloaded: true,
-                        ),
-                      ],
                     ),
                   ],
                 ),

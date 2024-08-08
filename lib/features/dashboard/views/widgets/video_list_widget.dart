@@ -5,9 +5,10 @@ import 'package:swa/core/constants/colors.dart';
 class VideoListWidget extends StatelessWidget {
   final String number;
   final bool isLocked;
+  final String title;
   const VideoListWidget({
     super.key,
-    required this.number, this.isLocked = true,
+    required this.number, this.isLocked = true, required this.title,
   });
 
   @override
@@ -44,7 +45,7 @@ class VideoListWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Why Using Graphic De..',
+                  title,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14.sp,
