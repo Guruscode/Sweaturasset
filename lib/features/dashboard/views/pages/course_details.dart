@@ -96,71 +96,75 @@ class _CourseDetailsState extends State<CourseDetails> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  widget.isPaid ? const SizedBox() : Container(
-                    padding: EdgeInsets.all(13.sp),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: lightestblueColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'N${widget.model.price.toString()}',
-                              style: TextStyle(
-                                fontSize: 23.sp,
-                                fontWeight: FontWeight.bold,
+                  widget.isPaid
+                      ? const SizedBox()
+                      : Container(
+                          padding: EdgeInsets.all(13.sp),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: lightestblueColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'N${widget.model.price.toString()}',
+                                    style: TextStyle(
+                                      fontSize: 23.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '-50%',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: Colors.grey.shade700,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      Text(
+                                        '2000',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: Colors.grey.shade700,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                          decorationColor: Colors.grey.shade700,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '-50%',
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: Colors.grey.shade700,
-                                  ),
+                              SizedBox(
+                                width: 20.w,
+                              ),
+                              SizedBox(
+                                width: 110.w,
+                                child: ReadMoreButtonWidget(
+                                  bgColor: blueColor,
+                                  onPressed: () {
+                                    Get.to(
+                                      () => PaymentPage(course: widget.model),
+                                    );
+                                  },
+                                  text: 'Buy now',
+                                  textColor: Colors.white,
                                 ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Text(
-                                  '2000',
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: Colors.grey.shade700,
-                                    decoration: TextDecoration.lineThrough,
-                                    decorationColor: Colors.grey.shade700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20.w,
-                        ),
-                        SizedBox(
-                          width: 110.w,
-                          child: ReadMoreButtonWidget(
-                            bgColor: blueColor,
-                            onPressed: () {
-                              Get.to(
-                                () => PaymentPage(course: widget.model),
-                              );
-                            },
-                            text: 'Buy now',
-                            textColor: Colors.white,
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -321,10 +325,14 @@ class _CourseDetailsState extends State<CourseDetails> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    PersistentNavBarNavigator.pushNewScreen(context, screen:  ContentPage(
-                                      id: widget.model.curriculums![index].id!.toInt(),
-                                      courseId: widget.model.id,
-                                    ),);
+                                    PersistentNavBarNavigator.pushNewScreen(
+                                      context,
+                                      screen: ContentPage(
+                                        id: widget.model.curriculums![index].id!
+                                            .toInt(),
+                                        courseId: widget.model.id!.toInt(),
+                                      ),
+                                    );
                                   },
                                   child: SectionWidget(
                                     section: widget.model.curriculums![index]

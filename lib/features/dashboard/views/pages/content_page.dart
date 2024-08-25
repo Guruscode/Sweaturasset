@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/core/constants/loading_widget.dart';
@@ -22,7 +21,7 @@ class _ContentPageState extends State<ContentPage> {
   @override
   void initState() {
     super.initState();
-    courseController.fetchContent(widget.id);
+    courseController.fetchContent(widget.id, widget.courseId);
   }
 
   @override
@@ -34,58 +33,45 @@ class _ContentPageState extends State<ContentPage> {
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
-      body: GetBuilder<CourseController>(
-        init: courseController,
-        builder: (controller) {
-          print(controller.content.value.length);
-          return Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Go ahead and pick what to read'),
-                controller.isLoading
-                    ? const Center(
-                        child: LoadingWidget(),
-                      )
-                    : controller.content.value.isEmpty ?
-                    const Text('No available content yet')
-                    :
-                    ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: controller.content.value.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Get.to(
-                                  () => SinglePage(
-                                    content: controller.content[index],
-                                  ),
-                                );
-                              },
-                              child: ListTile(
-                                tileColor: blueColor,
-                                title: Text(
-                                  controller.content[index].title ?? '',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-              ],
-            ),
+      body: Obx(() {
+        if (courseController.isLoadingContent.value) {
+          return const Center(
+            child: LoadingWidget(),
           );
-        },
-      ),
+        } else if (courseController.content.isEmpty) {
+          return const Center(child: Text('No available content yet'));
+        } else {
+          return ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+            itemCount: courseController.content.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(
+                      () => SinglePage(
+                        content: courseController.content[index],
+                      ),
+                    );
+                  },
+                  child: ListTile(
+                    tileColor: blueColor,
+                    title: Text(
+                      courseController.content[index].title ?? '',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        }
+      }),
     );
   }
 }
