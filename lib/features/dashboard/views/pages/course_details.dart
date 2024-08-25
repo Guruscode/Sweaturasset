@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/core/models/courses.dart';
 import 'package:swa/features/dashboard/views/widgets/read_more_button.dart';
 import 'package:swa/features/dashboard/views/widgets/section_widget.dart';
 import 'package:swa/features/dashboard/views/widgets/video_list_widget.dart';
+import 'package:swa/features/dashboard/views/pages/content_page.dart';
 import 'package:swa/features/payment/views/payment_screen.dart';
 
 class CourseDetails extends StatefulWidget {
   final CoursesModel model;
+  final bool isPaid;
 
-  const CourseDetails({super.key, required this.model});
+  const CourseDetails({super.key, required this.model, this.isPaid = false});
 
   @override
   State<CourseDetails> createState() => _CourseDetailsState();
@@ -93,7 +96,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Container(
+                  widget.isPaid ? const SizedBox() : Container(
                     padding: EdgeInsets.all(13.sp),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -212,7 +215,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                               width: 10.w,
                             ),
                             Text(
-                              'Language: ${widget.model.language!.capitalize}',
+                              'Language: ${widget.model.language?.capitalize}',
                               style: TextStyle(fontSize: 14.sp),
                             ),
                           ],
@@ -316,14 +319,22 @@ class _CourseDetailsState extends State<CourseDetails> {
                             )
                           : Column(
                               children: [
-                                SectionWidget(
-                                  section: widget.model.curriculums![index]
-                                          .sectionName ??
-                                      '',
-                                  title: widget.model.curriculums![index]
-                                          .sectionTitle ??
-                                      '',
-                                  time: '25 min',
+                                GestureDetector(
+                                  onTap: () {
+                                    PersistentNavBarNavigator.pushNewScreen(context, screen:  ContentPage(
+                                      id: widget.model.curriculums![index].id!.toInt(),
+                                      courseId: widget.model.id,
+                                    ),);
+                                  },
+                                  child: SectionWidget(
+                                    section: widget.model.curriculums![index]
+                                            .sectionName ??
+                                        '',
+                                    title: widget.model.curriculums![index]
+                                            .sectionTitle ??
+                                        '',
+                                    time: '25 min',
+                                  ),
                                 ),
                                 // ListView.builder(
                                 //   shrinkWrap: true,

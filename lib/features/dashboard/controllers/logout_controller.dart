@@ -20,9 +20,7 @@ class LogoutController extends GetxController {
         },
       );
       if (req.statusCode == 200) {
-        var t = jsonDecode(req.body)['access_token'];
-        print(t);
-        await box.write('token', t);
+        box.erase();
         if (box.read('token') == null) {
           Get.offAll(() => const LoginScreen());
         } else {

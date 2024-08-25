@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/dashboard/controllers/course_controller.dart';
+import 'package:swa/features/dashboard/controllers/user_controller.dart';
 import 'package:swa/features/dashboard/views/pages/course_details.dart';
 import 'package:swa/features/dashboard/views/widgets/resources_widget.dart';
 
@@ -17,10 +18,10 @@ class _ResourcesPageState extends State<ResourcesPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   final CourseController courseController = Get.put(CourseController());
+  final UserController userController = Get.put(UserController());
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: 3, vsync: this);
   }
@@ -89,51 +90,31 @@ class _ResourcesPageState extends State<ResourcesPage>
                 child: TabBarView(
                   controller: tabController,
                   children: [
-                    GetBuilder<CourseController>(
-                      init: courseController,
+                    GetBuilder<UserController>(
+                      init: userController,
                       builder: (controller) {
                         return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: controller.courses.value.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () {
-                                  Get.to(
-                                    () => CourseDetails(
-                                      model: controller.courses[index],
-                                    ),
-                                  );
-                                },
-                                child: ResourcesWidget(
-                                  course: controller.courses[index],
-                                ),
-                              );
-                            });
+                          shrinkWrap: true,
+                          itemCount: controller.courses.value.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                Get.to(
+                                      () => CourseDetails(
+                                    model: controller.courses[index],
+                                    isPaid: true,
+                                  ),
+                                );
+                              },
+                              child: ResourcesWidget(
+                                course: controller.courses[index],
+                              ),
+                            );
+                          },
+                        );
                       },
                     ),
-                    GetBuilder<CourseController>(
-                      init: courseController,
-                      builder: (controller) {
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: controller.courses.value.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () {
-                                  Get.to(
-                                        () => CourseDetails(
-                                      model: controller.courses[index],
-                                    ),
-                                  );
-                                },
-                                child: ResourcesWidget(
-                                  isCompleted: true,
-                                  course: controller.courses[index],
-                                ),
-                              );
-                            });
-                      },
-                    ),
+                    Text('Completed'),
                     ListView(
                       shrinkWrap: true,
                     ),

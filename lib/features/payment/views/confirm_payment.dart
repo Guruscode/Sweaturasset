@@ -3,9 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swa/core/constants/colors.dart';
+import 'package:swa/core/constants/loading_widget.dart';
 import 'package:swa/core/models/courses.dart';
 import 'package:swa/features/auth/views/widgets/button_widget.dart';
+import 'package:swa/features/dashboard/controllers/user_controller.dart';
 import 'package:swa/features/dashboard/views/widgets/bottom_bar.dart';
+import 'package:swa/features/payment/controllers/payment_controller.dart';
 
 class ConfirmPayment extends StatefulWidget {
   final int selected;
@@ -19,6 +22,9 @@ class ConfirmPayment extends StatefulWidget {
 }
 
 class _ConfirmPaymentState extends State<ConfirmPayment> {
+  final PaymentController paymentController = Get.put(PaymentController());
+  final UserController userController = Get.put(UserController());
+
   @override
   Widget build(BuildContext context) {
     // Define the payment options map
@@ -230,68 +236,105 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    ButtonWidget(
-                      bgColor: blueColor,
-                      onPressed: () {
-                        Get.defaultDialog(
-                          title: '',
-                          content: Container(
-                            padding: EdgeInsets.all(10),
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                  'assets/images/done.png',
-                                  scale: 2.0,
-                                ),
-                                Text(
-                                  'Congratulations',
-                                  style: GoogleFonts.jost(
-                                    color: const Color(0xff202244),
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5.h,
-                                ),
-                                Text(
-                                  'Your payment was successful',
-                                  style: GoogleFonts.jost(
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  'View receipt',
-                                  style: GoogleFonts.jost(
-                                    color: const Color(0xff219653),
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15.sp,
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: const Color(0xff219653),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                ButtonWidget(
-                                  bgColor: const Color(0xff219653),
-                                  onPressed: () {
-                                    Get.offAll(() => const AppBottomBar(),);
+                    GetBuilder<UserController>(
+                        init: userController,
+                        builder: (user) {
+                          return GetBuilder<PaymentController>(
+                              init: paymentController,
+                              builder: (controller) {
+                                return controller.isLoading ?
+                                    const LoadingWidget():
+                                  ButtonWidget(
+                                  bgColor: blueColor,
+                                  onPressed: () async {
+                                    var res = await controller.purchaseCourse(
+                                      courseId: widget.course.id.toString(),
+                                      userId: user.user.value.id.toString(),
+                                    );
+                                    if (res == 'purchased') {
+                                      Get.snackbar(
+                                        'Error',
+                                        'Already purchased',
+                                        backgroundColor: Colors.red,
+                                        colorText: Colors.white,
+                                      );
+                                    }else if(res == 'error') {
+                                      Get.snackbar(
+                                        'Error',
+                                        'Something went wrong',
+                                        backgroundColor: Colors.red,
+                                        colorText: Colors.white,
+                                      );
+                                    }else {
+                                      user.fetchUserCourses();
+                                      Get.defaultDialog(
+                                        title: '',
+                                        content: Container(
+                                          padding: EdgeInsets.all(10),
+                                          child: Column(
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/done.png',
+                                                scale: 2.0,
+                                              ),
+                                              Text(
+                                                'Congratulations',
+                                                style: GoogleFonts.jost(
+                                                  color: const Color(
+                                                      0xff202244),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18.sp,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5.h,
+                                              ),
+                                              Text(
+                                                'Your payment was successful',
+                                                style: GoogleFonts.jost(
+                                                  fontSize: 14.sp,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              Text(
+                                                'View receipt',
+                                                style: GoogleFonts.jost(
+                                                  color: const Color(
+                                                      0xff219653),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 15.sp,
+                                                  decoration: TextDecoration
+                                                      .underline,
+                                                  decorationColor: const Color(
+                                                      0xff219653),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10.h,
+                                              ),
+                                              ButtonWidget(
+                                                bgColor: const Color(
+                                                    0xff219653),
+                                                onPressed: () {
+                                                  Get
+                                                      .offAll(() => const AppBottomBar(),);
+                                                },
+                                                text: " Proceed to Learn",
+                                                textColor: Colors.white,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   },
-                                  text: " Proceed to Learn",
+                                  text: 'Proceed to Pay',
                                   textColor: Colors.white,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      text: 'Proceed to Pay',
-                      textColor: Colors.white,
-                    ),
+                                );
+                              });
+                        }),
                   ],
                 ),
               ),

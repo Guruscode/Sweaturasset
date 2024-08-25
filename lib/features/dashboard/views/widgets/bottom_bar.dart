@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/dashboard/views/pages/calculator_page.dart';
 import 'package:swa/features/dashboard/views/pages/home_page.dart';
@@ -15,6 +16,8 @@ class AppBottomBar extends StatefulWidget {
 }
 
 class _AppBottomBarState extends State<AppBottomBar> {
+  PersistentTabController _controller =
+      PersistentTabController(initialIndex: 0);
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -23,61 +26,77 @@ class _AppBottomBarState extends State<AppBottomBar> {
     });
   }
 
-  final List<Widget> _pages = [
-    const HomePage(),
-    const ResourcesPage(),
-    const CalculatorPage(),
-    const SettingsPage(),
-  ];
+  List<Widget> _pages() {
+    return [
+      const HomePage(),
+      const ResourcesPage(),
+      const CalculatorPage(),
+      const SettingsPage(),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Image.asset(
+          'assets/icons/home.png',
+          height: 30.h,
+        ),
+        title: "Home",
+        activeColorPrimary: Colors.blue,
+        inactiveColorPrimary: Colors.grey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Image.asset(
+          'assets/icons/book.png',
+          height: 30.h,
+        ),
+        title: ("Resources"),
+        activeColorPrimary: Colors.blue,
+        inactiveColorPrimary: Colors.grey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Image.asset(
+          'assets/icons/calculator.png',
+          height: 30.h,
+        ),
+        title: ("Calculator"),
+        activeColorPrimary: Colors.blue,
+        inactiveColorPrimary: Colors.grey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Image.asset(
+          'assets/icons/setting.png',
+          height: 30.h,
+        ),
+        title: ("Settings"),
+        activeColorPrimary: Colors.blue,
+        inactiveColorPrimary: Colors.grey,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        selectedItemColor: blueColor,
-        unselectedItemColor: Colors.black,
-        elevation: 0,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/icons/home.png',
-              height: 30.h,
-              color: _selectedIndex == 0 ? blueColor : Colors.grey.shade800,
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/icons/book.png',
-              height: 30.h,
-              color: _selectedIndex == 1 ? blueColor : Colors.grey.shade800,
-            ),
-            label: 'Resources',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/icons/calculator.png',
-              height: 30.h,
-              color: _selectedIndex == 2 ? blueColor : Colors.grey.shade800,
-            ),
-            label: 'Calculator',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/icons/setting.png',
-              height: 30.h,
-              color: _selectedIndex == 3 ? blueColor : Colors.grey.shade800,
-            ),
-            label: 'Setting',
-          ),
-        ],
+    return PersistentTabView(
+      context,
+      controller: _controller,
+      screens: _pages(),
+      items: _navBarItems(),
+      handleAndroidBackButtonPress: true,
+      stateManagement: true,
+      hideNavigationBarWhenKeyboardAppears: true,
+      padding: const EdgeInsets.only(top: 8),
+      isVisible: true,
+      animationSettings: const NavBarAnimationSettings(
+        navBarItemAnimation: ItemAnimationSettings(
+          duration: Duration(milliseconds: 400),
+          curve: Curves.ease,
+        ),
       ),
-      body: _pages[_selectedIndex],
+      confineToSafeArea: true,
+      navBarHeight: 60.h,
+      navBarStyle: NavBarStyle.style1,
     );
   }
 }

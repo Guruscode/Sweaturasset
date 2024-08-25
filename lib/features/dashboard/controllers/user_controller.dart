@@ -5,11 +5,14 @@ import 'package:get/get.dart';
 import 'package:swa/core/constants/const.dart';
 import 'package:swa/core/constants/errors.dart';
 import 'package:http/http.dart' as http;
+import 'package:swa/core/models/courses.dart';
 import 'package:swa/core/models/user_model.dart';
 
 class UserController extends GetxController {
   bool isLoading = false;
   var user = UserModel().obs;
+  var courses = <CoursesModel>[].obs;
+  var token = box.read('token');
 
   void loading() {
     isLoading = !isLoading;
@@ -20,12 +23,12 @@ class UserController extends GetxController {
   void onInit() {
     super.onInit();
     getUser();
+    fetchUserCourses();
   }
 
   Future getUser() async {
     loading();
     try {
-      var token = box.read('token');
       var request = await http.get(
         Uri.parse('$apiUrl/user-profile'),
         headers: {
@@ -41,6 +44,38 @@ class UserController extends GetxController {
       var data = jsonDecode(request.body)['user'];
       print(data);
       user.value = UserModel.fromJson(data);
+    } catch (e) {
+      print(e.toString());
+      return Left(AppFailure());
+    } finally {
+      loading();
+    }
+  }
+
+  Future<Either<AppFailure, List<CoursesModel>>> fetchUserCourses() async {
+    courses.value.clear();
+    loading();
+    try {
+      var request = await http.get(
+        Uri.parse('$apiUrl/user/courses'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+      );
+      var response = jsonDecode(request.body);
+      if (request.statusCode != 200) {
+        response = response as Map<String, dynamic>;
+        print(response);
+        return Left(AppFailure(response['errors']));
+      }
+      print("from my: $response");
+      for (final data in response['courses']) {
+        print(data);
+        courses.value.add(CoursesModel.fromJson(data));
+        print("course: ${courses.value}");
+      }
+      return Right(courses.value);
     } catch (e) {
       print(e.toString());
       return Left(AppFailure());

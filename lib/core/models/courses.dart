@@ -11,63 +11,59 @@ String coursesModelToJson(CoursesModel data) => json.encode(data.toJson());
 class CoursesModel {
   int? id;
   String? name;
-  int? isPaid;
   String? price;
   String? overview;
   String? language;
   int? numberOfLessons;
-  int? hours;
   List<String>? whatYouWillLearn;
+  String? type;
+  int? hours;
   DateTime? createdAt;
   DateTime? updatedAt;
-  dynamic deletedAt;
   List<Curriculum>? curriculums;
 
   CoursesModel({
     this.id,
     this.name,
-    this.isPaid,
     this.price,
     this.overview,
     this.language,
     this.numberOfLessons,
-    this.hours,
     this.whatYouWillLearn,
+    this.type,
+    this.hours,
     this.createdAt,
     this.updatedAt,
-    this.deletedAt,
     this.curriculums,
   });
 
   factory CoursesModel.fromJson(Map<String, dynamic> json) => CoursesModel(
     id: json["id"],
     name: json["name"],
-    isPaid: json["is_paid"],
     price: json["price"],
     overview: json["overview"],
     language: json["language"],
     numberOfLessons: json["number_of_lessons"],
-    hours: json["hours"],
     whatYouWillLearn: json["what_you_will_learn"] == null ? [] : List<String>.from(json["what_you_will_learn"]!.map((x) => x)),
+    type: json["type"],
+    hours: json["hours"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    deletedAt: json["deleted_at"],
     curriculums: json["curriculums"] == null ? [] : List<Curriculum>.from(json["curriculums"]!.map((x) => Curriculum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "is_paid": isPaid,
     "price": price,
     "overview": overview,
     "language": language,
     "number_of_lessons": numberOfLessons,
-    "hours": hours,
     "what_you_will_learn": whatYouWillLearn == null ? [] : List<dynamic>.from(whatYouWillLearn!.map((x) => x)),
+    "type": type,
+    "hours": hours,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
-    "deleted_at": deletedAt,
     "curriculums": curriculums == null ? [] : List<dynamic>.from(curriculums!.map((x) => x.toJson())),
   };
 }
@@ -120,8 +116,9 @@ class Content {
   int? id;
   int? curriculaId;
   String? title;
-  String? videoUrl;
+  dynamic videoUrl;
   dynamic fileUrl;
+  String? content;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -131,6 +128,7 @@ class Content {
     this.title,
     this.videoUrl,
     this.fileUrl,
+    this.content,
     this.createdAt,
     this.updatedAt,
   });
@@ -141,6 +139,7 @@ class Content {
     title: json["title"],
     videoUrl: json["video_url"],
     fileUrl: json["file_url"],
+    content: json["content"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
   );
@@ -151,6 +150,7 @@ class Content {
     "title": title,
     "video_url": videoUrl,
     "file_url": fileUrl,
+    "content": content,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
   };

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:swa/features/dashboard/controllers/ads_controller.dart';
@@ -107,7 +108,14 @@ class _HomePageState extends State<HomePage> {
                         height: 20.h,
                       ),
                       InkWell(
-                        onTap: () => Get.to(() => const AppBottomBar()),
+                        onTap: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: const HomePage(),
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
                         child: Row(
                           children: [
                             Image.asset(
@@ -132,7 +140,14 @@ class _HomePageState extends State<HomePage> {
                         height: 20.h,
                       ),
                       InkWell(
-                        onTap: () => Get.to(() => const ResourcesPage()),
+                        onTap: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: const ResourcesPage(),
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
                         child: Row(
                           children: [
                             Image.asset(
@@ -157,7 +172,14 @@ class _HomePageState extends State<HomePage> {
                         height: 20.h,
                       ),
                       InkWell(
-                        onTap: () => Get.to(() => const CalculatorIntro()),
+                        onTap: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: const CalculatorIntro(),
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
                         child: Row(
                           children: [
                             Image.asset(
@@ -182,7 +204,14 @@ class _HomePageState extends State<HomePage> {
                         height: 20.h,
                       ),
                       InkWell(
-                        onTap: () => Get.to(() => const SettingsPage()),
+                        onTap: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: const SettingsPage(),
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
                         child: Row(
                           children: [
                             Image.asset(
@@ -326,7 +355,7 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 20.0,
                             ),
                             child: SizedBox(
-                              height: 300.h,
+                              height: 350.h,
                               child: GetBuilder<ArticleController>(
                                   init: articleController,
                                   builder: (controller) {
@@ -364,8 +393,10 @@ class _HomePageState extends State<HomePage> {
                                             itemBuilder: (context, index) {
                                               return ReadCardWidget(
                                                 onTap: () {
-                                                  Get.to(
-                                                    () => ArticlePage(
+                                                  PersistentNavBarNavigator
+                                                      .pushNewScreen(
+                                                    context,
+                                                    screen: ArticlePage(
                                                       article: controller
                                                           .articles
                                                           .value[index],
@@ -390,7 +421,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                           CalculateBannerWidget(
                             onTap: () {
-                              Get.to(() => const CalculatorIntro());
+                              PersistentNavBarNavigator.pushNewScreen(
+                                context,
+                                screen: const CalculatorIntro(),
+                              );
                             },
                           ),
                           SizedBox(
@@ -451,8 +485,10 @@ class _HomePageState extends State<HomePage> {
                                                   model: controller
                                                       .courses.value[index],
                                                   onTap: () {
-                                                    Get.to(
-                                                      () => PaymentPage(
+                                                    PersistentNavBarNavigator
+                                                        .pushNewScreen(
+                                                      context,
+                                                      screen: PaymentPage(
                                                         course: controller
                                                             .courses
                                                             .value[index],

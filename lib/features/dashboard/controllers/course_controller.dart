@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:swa/core/constants/const.dart';
 import 'package:swa/core/constants/errors.dart';
+import 'package:swa/core/models/content_model.dart';
 import 'package:swa/core/models/courses.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +12,8 @@ import 'package:http/http.dart' as http;
 class CourseController extends GetxController {
   bool isLoading = false;
   var courses = <CoursesModel>[].obs;
+  var content = <ContentModel>[].obs;
+  var token = box.read('token');
 
   void loading() {
     isLoading = !isLoading;
@@ -34,12 +38,46 @@ class CourseController extends GetxController {
         return Left(AppFailure(response['errors']));
       }
       print(response);
-      for (final data in response) {
+      for (final data in response['courses']) {
         print(data);
         courses.value.add(CoursesModel.fromJson(data));
         // print(courses.value);
       }
       return Right(courses.value);
+    } catch (e) {
+      print(e.toString());
+      return Left(AppFailure());
+    } finally {
+      loading();
+    }
+  }
+
+  Future<Either<AppFailure, List<ContentModel>>> fetchContent(id) async {
+    content.value.clear();
+    loading();
+    try {
+      var request = await http.get(
+        Uri.parse('$apiUrl/contents/$id'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+      );
+      var response = jsonDecode(request.body);
+      if (request.statusCode != 200) {
+        response = response as Map<String, dynamic>;
+        print(response);
+        Get.snackbar('Error', response['message'], backgroundColor: Colors.red, colorText: Colors.white,);
+        Get.back();
+        return Left(AppFailure(response['errors']));
+      }
+      print(response);
+      for (final data in response['contents']) {
+        print(data);
+        content.value.add(ContentModel.fromJson(data));
+        // print(courses.value);
+      }
+      return Right(content.value);
     } catch (e) {
       print(e.toString());
       return Left(AppFailure());

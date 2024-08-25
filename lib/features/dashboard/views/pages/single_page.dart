@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:swa/core/models/article_model.dart';
+import 'package:swa/core/models/content_model.dart';
 
-class ArticlePage extends StatelessWidget {
-  final ArticleModel article;
+class SinglePage extends StatelessWidget {
+  final ContentModel content;
 
-  const ArticlePage({super.key, required this.article});
+  const SinglePage({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class ArticlePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         // backgroundColor: Colors.white,
-        title: Text(article.title ?? ''),
+        title: Text(content.title ?? ''),
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -37,17 +38,11 @@ class ArticlePage extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              Text(
-                'October 24, 2023 . ${article.author}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               SizedBox(
                 height: 20.h,
               ),
               Text(
-                article.title ?? '',
+                content.title ?? '',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.sp,
@@ -57,7 +52,7 @@ class ArticlePage extends StatelessWidget {
                 height: 20.h,
               ),
               Text(
-                article.content ?? '',
+                content.content ?? '',
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                 ),
