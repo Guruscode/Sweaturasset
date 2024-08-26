@@ -83,4 +83,38 @@ class UserController extends GetxController {
       loading();
     }
   }
+
+  Future<String> updateProfile({
+    required int userId,
+    required String fullName,
+    required String email,
+    required String phoneNumber,
+    required DateTime dob,
+  }) async {
+    loading();
+    try {
+      print('Hello');
+      var request =
+          await http.put(Uri.parse('$apiUrl/editProfile/$userId'), headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token'
+      }, body: {
+        'name': fullName,
+        'phone_number': phoneNumber,
+        'date_of_birth': dob.toString(),
+      });
+      if (request.statusCode == 200) {
+        getUser();
+        return 'success';
+      } else {
+        print(json.decode(request.body)['errors']);
+        return json.decode(request.body)['errors'].toString();
+      }
+    } catch (e) {
+      print(e.toString());
+      return 'error';
+    } finally {
+      loading();
+    }
+  }
 }

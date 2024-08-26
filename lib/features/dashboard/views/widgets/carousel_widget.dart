@@ -84,6 +84,7 @@ class CarouselWidget extends StatelessWidget {
                       child: Center(
                         child: Text(
                           controller.ads.value[index].title ?? '',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 20.sp,
                             color: Colors.white,
