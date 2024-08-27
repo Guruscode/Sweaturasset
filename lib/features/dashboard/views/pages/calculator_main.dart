@@ -46,12 +46,17 @@ class _CalculatorMainState extends State<CalculatorMain> {
 
   final CalculatorController _calculatorController = Get.put(CalculatorController());
 
-  void ValidateFields() {
+  void validateFields() {
     if(utilOneController.text.isEmpty || utilTwoController.text.isEmpty || utilThreeController.text.isEmpty || 
       billsOneController.text.isEmpty || billsTwoController.text.isEmpty || billsThreeController.text.isEmpty ||
-      houseHoldOneController.
+      houseHoldOneController.text.isEmpty || houseHoldTwoController.text.isEmpty || houseHoldThreeController.text.isEmpty ||
+      houseHoldFourController.text.isEmpty || groceryOneController.text.isEmpty || groceryTwoController.text.isEmpty ||
+      educationOneController.text.isEmpty || educationTwoController.text.isEmpty || transportationController.text.isEmpty ||
+      mediacalTransportation.text.isEmpty || contributionOneController.text.isEmpty || contributionTwoController.text.isEmpty ||
+      miscellaneousController.text.isEmpty
     ) {
-
+      Get.snackbar('Error', 'Make sure all fields are inserted', backgroundColor: Colors.red, colorText: Colors.white,);
+      return;
     }
   }
 
@@ -609,7 +614,7 @@ class _CalculatorMainState extends State<CalculatorMain> {
                 text: 'Continue',
                 textColor: Colors.white,
                 onPressed: () async {
-                  
+                  validateFields();
                 },
               ),
             ],
