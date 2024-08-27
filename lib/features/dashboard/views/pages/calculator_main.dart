@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/auth/views/pages/forgot_password.dart';
+import 'package:swa/features/dashboard/controllers/calculator_controller.dart';
 import 'package:swa/features/dashboard/views/widgets/input_field_widget.dart';
 import 'package:swa/features/dashboard/views/widgets/read_more_button.dart';
 
@@ -13,6 +15,13 @@ class CalculatorMain extends StatefulWidget {
 }
 
 class _CalculatorMainState extends State<CalculatorMain> {
+
+  final TextEditingController utilOneController = TextEditingController();
+  final TextEditingController utilTwoController = TextEditingController();
+  final TextEditingController utilThreeController = TextEditingController();
+
+  final CalculatorController _calculatorController = Get.put(CalculatorController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,32 +97,41 @@ class _CalculatorMainState extends State<CalculatorMain> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            'Total = N180,000',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Obx(() {
+                              return Text(
+                                'Total = ${_calculatorController.sumUtil}',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            }
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: utilOneController,
                         text: 'Electricity/Fuel for generator',
                         hintText: 'N60,000',
+                        onChanged: _calculatorController.updateUtilOne,
+                        keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: utilTwoController,
                         text: 'Water',
                         hintText: 'N60,000',
+                        onChanged: _calculatorController.updateUtilTwo,
+                        keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: utilThreeController,
                         text: 'Trash bill',
                         hintText: 'N60,000',
+                        onChanged: _calculatorController.updateUtilThree,
+                        keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: 20.h),
                     ],

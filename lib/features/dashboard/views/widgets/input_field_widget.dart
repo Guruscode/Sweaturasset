@@ -7,6 +7,8 @@ class TextInputField extends StatelessWidget {
   final String text;
   final TextEditingController controller;
   final Widget? suffixIcon;
+  final ValueChanged<String>? onChanged;
+  final TextInputType keyboardType;
 
   const TextInputField({
     super.key,
@@ -14,7 +16,7 @@ class TextInputField extends StatelessWidget {
     this.isPassword = false,
     required this.text,
     required this.controller,
-    this.suffixIcon,
+    this.suffixIcon, this.onChanged, this.keyboardType = TextInputType.text,
   });
 
   @override
@@ -31,8 +33,10 @@ class TextInputField extends StatelessWidget {
           ),
           SizedBox(height: 6.h),
           TextField(
+            onChanged: onChanged,
             obscureText: isPassword,
             controller: controller,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               border: InputBorder.none,
               filled: true,

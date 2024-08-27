@@ -117,4 +117,36 @@ class UserController extends GetxController {
       loading();
     }
   }
+
+  Future<String> changePassword({
+    required String currentPassword,
+    required String password,
+    required String confirmPassword
+  }) async {
+    loading();
+    try {
+      print('Hello');
+      var request =
+          await http.post(Uri.parse('$apiUrl/change-password'), headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token'
+      }, body: {
+        'current_password': currentPassword,
+        'password': password,
+        'password_confirmation': confirmPassword,
+      });
+      if (request.statusCode == 200) {
+        getUser();
+        return 'success';
+      } else {
+        print(json.decode(request.body));
+        return json.decode(request.body)['error'].toString();
+      }
+    } catch (e) {
+      print(e.toString());
+      return 'error';
+    } finally {
+      loading();
+    }
+  }
 }
