@@ -20,7 +20,64 @@ class _CalculatorMainState extends State<CalculatorMain> {
   final TextEditingController utilTwoController = TextEditingController();
   final TextEditingController utilThreeController = TextEditingController();
 
+  final TextEditingController billsOneController = TextEditingController();
+  final TextEditingController billsTwoController = TextEditingController();
+  final TextEditingController billsThreeController = TextEditingController();
+
+  final TextEditingController houseHoldOneController = TextEditingController();
+  final TextEditingController houseHoldTwoController = TextEditingController();
+  final TextEditingController houseHoldThreeController = TextEditingController();
+  final TextEditingController houseHoldFourController = TextEditingController();
+
+  final TextEditingController groceryOneController = TextEditingController();
+  final TextEditingController groceryTwoController = TextEditingController();
+
+  final TextEditingController educationOneController = TextEditingController();
+  final TextEditingController educationTwoController = TextEditingController();
+
+  final TextEditingController transportationController = TextEditingController();
+  final TextEditingController mediacalTransportation = TextEditingController();
+
+  final TextEditingController contributionOneController = TextEditingController();
+  final TextEditingController contributionTwoController = TextEditingController();
+
+  final TextEditingController miscellaneousController = TextEditingController();
+
+
   final CalculatorController _calculatorController = Get.put(CalculatorController());
+
+  void ValidateFields() {
+    if(utilOneController.text.isEmpty || utilTwoController.text.isEmpty || utilThreeController.text.isEmpty || 
+      billsOneController.text.isEmpty || billsTwoController.text.isEmpty || billsThreeController.text.isEmpty ||
+      houseHoldOneController.
+    ) {
+
+    }
+  }
+
+  @override
+  void dispose() {
+    utilOneController.dispose();
+    utilTwoController.dispose();
+    utilThreeController.dispose();
+    billsOneController.dispose();
+    billsTwoController.dispose();
+    billsThreeController.dispose();
+    houseHoldOneController.dispose();
+    houseHoldTwoController.dispose();
+    houseHoldThreeController.dispose();
+    houseHoldFourController.dispose();
+    groceryOneController.dispose();
+    groceryTwoController.dispose();
+    educationOneController.dispose();
+    educationTwoController.dispose();
+    transportationController.dispose();
+    mediacalTransportation.dispose();
+    contributionOneController.dispose();
+    contributionTwoController.dispose();
+    miscellaneousController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +156,7 @@ class _CalculatorMainState extends State<CalculatorMain> {
                           ),
                           Obx(() {
                               return Text(
-                                'Total = ${_calculatorController.sumUtil}',
+                                'Total = N${_calculatorController.sumUtil}',
                                 style: TextStyle(
                                   fontSize: 10.sp,
                                   fontWeight: FontWeight.bold,
@@ -156,33 +213,42 @@ class _CalculatorMainState extends State<CalculatorMain> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            'Total = N80,000',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Obx(() {
+                              return Text(
+                                'Total = N${_calculatorController.sumBills}',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            }
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: billsOneController,
                         text: 'Entertainment/ Cable TV',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateBillOne,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: billsTwoController,
                         text: 'Phone Credit/Data',
                         hintText: 'N10,000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateBillTwo,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: billsThreeController,
                         text:
                             'Mortgage/ Rents/ Tenement tax/Property or Land Taxl',
                         hintText: 'N60,000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updatebillThree,
                       ),
                       SizedBox(height: 20.h),
                     ],
@@ -208,39 +274,50 @@ class _CalculatorMainState extends State<CalculatorMain> {
                             ),
                           ),
                           Expanded(
-                            child: Text(
-                              'Total = N100,000',
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Obx(() {
+                                return Text(
+                                  'Total = N ${_calculatorController.sumHousehold}',
+                                  style: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              }
                             ),
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: houseHoldOneController,
                         text: 'Toiletries and household consumables',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateHouseHoldOne,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: houseHoldTwoController,
                         text: 'Laundry+Household Cleaning',
                         hintText: 'N10,000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateHouseHoldTwo,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: houseHoldThreeController,
                         text: 'Security',
                         hintText: 'N60,000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateHouseHoldThree,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: houseHoldFourController,
                         text: 'Haircut/Hairdo',
                         hintText: 'N20,000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateHouseHoldFour,
                       ),
                     ],
                   ),
@@ -264,26 +341,33 @@ class _CalculatorMainState extends State<CalculatorMain> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            'Total = N80,000',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Obx(() {
+                              return Text(
+                                'Total = N${_calculatorController.sumGrocery}',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            }
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: groceryOneController,
                         text: 'Food stuff and Groceries',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateGroceryOne,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: groceryTwoController,
                         text: 'Beverages',
                         hintText: 'N10,000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateGroceryTwo,
                       ),
                     ],
                   ),
@@ -307,27 +391,34 @@ class _CalculatorMainState extends State<CalculatorMain> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            'Total = N20,000',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Obx(() {
+                              return Text(
+                                'Total = N${_calculatorController.sumEducation}',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            }
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: educationOneController,
                         text:
                             'Children School Fees (if you are likely to have children in school at retirement)',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateEducationOne,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: educationTwoController,
                         text: 'Beverages',
                         hintText: 'N10,000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateEducationTwo,
                       ),
                     ],
                   ),
@@ -351,20 +442,25 @@ class _CalculatorMainState extends State<CalculatorMain> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            'Total = N10,000',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Obx(() {
+                              return Text(
+                                'Total = N${_calculatorController.sumTransportation}',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            }
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: transportationController,
                         text: 'Transportation/Fuel/Car Maintenance',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateTransportation,
                       ),
                     ],
                   ),
@@ -388,20 +484,25 @@ class _CalculatorMainState extends State<CalculatorMain> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            'Total = N10,000',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Obx(() {
+                              return Text(
+                                'Total = N${_calculatorController.sumMedical}',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            }
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: mediacalTransportation,
                         text: 'Medicals/Health Insurance/Medications',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateMedical,
                       ),
                     ],
                   ),
@@ -426,28 +527,35 @@ class _CalculatorMainState extends State<CalculatorMain> {
                             ),
                           ),
                           Expanded(
-                            child: Text(
-                              'Total = N20,000',
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Obx(() {
+                                return Text(
+                                  'Total = N${_calculatorController.sumContribution}',
+                                  style: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              }
                             ),
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: contributionOneController,
                         text:
                             'Dependants and Black Tax(Contribution to extended family welfare)',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateContributionOne,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: contributionTwoController,
                         text: 'Social and Religious Welfare commitments',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateContributionTwo,
                       ),
                     ],
                   ),
@@ -471,20 +579,25 @@ class _CalculatorMainState extends State<CalculatorMain> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            'Total = N10,000',
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Obx(() {
+                              return Text(
+                                'Total = N${_calculatorController.sumMiscellaneous}',
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            }
                           ),
                         ],
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
-                        controller: TextEditingController(),
+                        controller: miscellaneousController,
                         text: 'Miscellaneous Expenditure',
                         hintText: 'N10, 000',
+                        keyboardType: TextInputType.number,
+                        onChanged: _calculatorController.updateMiscellaneous,
                       ),
                     ],
                   ),
@@ -495,7 +608,9 @@ class _CalculatorMainState extends State<CalculatorMain> {
                 bgColor: blueColor,
                 text: 'Continue',
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () async {
+                  
+                },
               ),
             ],
           ),
