@@ -59,9 +59,9 @@ class _ContentPageState extends State<ContentPage> {
                     tileColor: blueColor,
                     title: Text(
                       courseController.content[index].title ?? '',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,
                     ),

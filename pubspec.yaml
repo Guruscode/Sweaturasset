@@ -39,7 +39,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   smooth_page_indicator: ^1.1.0
   pinput: ^5.0.0
-  flutter_carousel_widget: ^2.2.0
+  carousel_slider: ^5.0.0
   flutter_easy_faq: ^1.0.1
   get: ^5.0.0-release-candidate-6
   http: ^1.2.2
@@ -49,6 +49,7 @@ dependencies:
   custom_refresh_indicator: ^4.0.1
   persistent_bottom_nav_bar: ^6.2.1
   pay_with_paystack: ^1.0.10
+  fl_chart: ^0.69.0
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,10 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+dependency_overrides:
+  win32: ^5.5.4
+
 
 # The following section is specific to Flutter packages.
 flutter:

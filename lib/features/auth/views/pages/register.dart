@@ -9,7 +9,6 @@ import 'package:swa/features/auth/views/pages/login.dart';
 import 'package:swa/features/auth/views/widgets/button_widget.dart';
 import 'package:swa/features/auth/views/widgets/input_field_widget.dart';
 import 'package:swa/features/auth/views/widgets/social_button_widget.dart';
-import 'package:swa/features/dashboard/views/widgets/bottom_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

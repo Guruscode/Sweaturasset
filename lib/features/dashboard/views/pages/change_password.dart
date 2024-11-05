@@ -92,21 +92,21 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Change Password'),
+        title: const Text('Change Password'),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: Colors.black,
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 18,
@@ -132,7 +132,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           text: 'Current password',
                           hintText: '********',
                           isPassword: true,
-                          suffixIcon: Icon(Icons.visibility_off),
+                          suffixIcon: const Icon(Icons.visibility_off),
                         ),
                         SizedBox(height: 10.h),
                         Align(
@@ -164,7 +164,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           text: 'New Password',
                           hintText: '********',
                           isPassword: true,
-                          suffixIcon: Icon(Icons.visibility_off),
+                          suffixIcon: const Icon(Icons.visibility_off),
                         ),
                         SizedBox(height: 20.h),
                         TextInputField(
@@ -172,7 +172,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           text: 'Confirm new password',
                           hintText: '********',
                           isPassword: true,
-                          suffixIcon: Icon(Icons.visibility_off),
+                          suffixIcon: const Icon(Icons.visibility_off),
                         ),
                       ],
                     ),

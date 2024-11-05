@@ -23,7 +23,7 @@ class CalculateBannerWidget extends StatelessWidget {
           ),
         ),
         Align(
-          alignment: Alignment(1.2, 0.0),
+          alignment: const Alignment(1.2, 0.0),
           child: Padding(
             padding: const EdgeInsets.only(right: 20, top: 20),
             child: Image.asset(

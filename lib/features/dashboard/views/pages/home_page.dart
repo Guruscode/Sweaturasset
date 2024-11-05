@@ -463,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                                                 itemBuilder: (context, index) {
                                                   return Padding(
                                                     padding:
-                                                        EdgeInsets.all(8.0),
+                                                        const EdgeInsets.all(8.0),
                                                     child: QuickPickWidget(
                                                       onTap: () {},
                                                     ),
@@ -480,7 +480,7 @@ class _HomePageState extends State<HomePage> {
                                                 controller.courses.length,
                                             itemBuilder: (context, index) {
                                               return Padding(
-                                                padding: EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(8.0),
                                                 child: QuickPickWidget(
                                                   model: controller
                                                       .courses.value[index],

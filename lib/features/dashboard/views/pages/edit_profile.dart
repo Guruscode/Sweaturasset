@@ -121,21 +121,21 @@ class _EditProfileState extends State<EditProfile> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: Colors.black,
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 18,
@@ -176,7 +176,7 @@ class _EditProfileState extends State<EditProfile> {
                                 right: 0,
                                 child: Container(
                                   padding: EdgeInsets.all(5.sp),
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
                                   child: Icon(
@@ -240,7 +240,7 @@ class _EditProfileState extends State<EditProfile> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                             ],
                           ),
                         ),

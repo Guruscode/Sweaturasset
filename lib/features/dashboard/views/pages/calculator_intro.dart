@@ -18,21 +18,21 @@ class _CalculatorIntroState extends State<CalculatorIntro> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Calculator'),
+        title: const Text('Calculator'),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: Colors.black,
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 18,
@@ -58,7 +58,7 @@ class _CalculatorIntroState extends State<CalculatorIntro> {
                 ),
               ),
               SizedBox(height: 10.h),
-              Text(
+              const Text(
                 'Estimate your current monthly and annual expenses and extrapolate it for your probable expenses at retirement and estimated expenses for 20 years post retirement with and without the factor of inflation',
                 style: TextStyle(),
               ),
@@ -72,14 +72,14 @@ class _CalculatorIntroState extends State<CalculatorIntro> {
                 ),
               ),
               SizedBox(height: 10.h),
-              Text(
+              const Text(
                 'Kindly input your estimated cost for each of the expense every month',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 10.h),
-              Text(
+              const Text(
                 'If you have dependants (i.e wife, kids, sibilings) you can add them to the expenses',
                 style: TextStyle(),
               ),

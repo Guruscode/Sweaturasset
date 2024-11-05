@@ -68,7 +68,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 borderRadius: BorderRadius.circular(
                                   8.sp,
                                 ),
-                                side: BorderSide(
+                                side: const BorderSide(
                                   color: blueColor,
                                 ),
                               ),
@@ -76,7 +76,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             onPressed: () {
                               Navigator.pop(context); // Close bottom sheet
                             },
-                            child: Text(
+                            child: const Text(
                               'Cancel',
                               style: TextStyle(
                                 color: blueColor,
@@ -112,9 +112,9 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: SizedBox(),
+        leading: const SizedBox(),
         backgroundColor: Colors.white,
-        title: Text('Settings'),
+        title: const Text('Settings'),
         centerTitle: true,
       ),
       body: Padding(
@@ -195,7 +195,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     'Notification',
                     style: TextStyle(fontSize: 14.sp),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CupertinoSwitch(
                     activeColor: Colors.grey.shade300,
                     thumbColor: blueColor,
@@ -215,7 +215,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     'Updates',
                     style: TextStyle(fontSize: 14.sp),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CupertinoSwitch(
                     activeColor: Colors.grey.shade300,
                     thumbColor: blueColor,
@@ -244,7 +244,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     'Language',
                     style: TextStyle(fontSize: 14.sp),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     padding: EdgeInsets.all(4.sp),
                     decoration: BoxDecoration(
@@ -264,7 +264,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     'Region',
                     style: TextStyle(fontSize: 14.sp),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     padding: EdgeInsets.all(4.sp),
                     decoration: BoxDecoration(

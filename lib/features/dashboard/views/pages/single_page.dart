@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:swa/core/models/article_model.dart';
 import 'package:swa/core/models/content_model.dart';
 
 class SinglePage extends StatelessWidget {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/auth/views/pages/login.dart';
-import 'package:swa/features/auth/views/pages/otp_page.dart';
 import 'package:swa/features/auth/views/pages/password_changed.dart';
 import 'package:swa/features/auth/views/widgets/button_widget.dart';
 import 'package:swa/features/auth/views/widgets/input_field_widget.dart';

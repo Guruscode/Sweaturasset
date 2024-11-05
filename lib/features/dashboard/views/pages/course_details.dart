@@ -28,21 +28,21 @@ class _CourseDetailsState extends State<CourseDetails> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Course detail'),
+        title: const Text('Course detail'),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: Colors.black,
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 18,
@@ -212,7 +212,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.speaker_outlined,
                             ),
                             SizedBox(

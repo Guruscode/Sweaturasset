@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/core/constants/loading_widget.dart';
 import 'package:swa/features/auth/controllers/auth_controller.dart';
-import 'package:swa/features/auth/views/pages/forgot_password.dart';
 import 'package:swa/features/auth/views/pages/register.dart';
 import 'package:swa/features/auth/views/widgets/button_widget.dart';
 import 'package:swa/features/auth/views/widgets/input_field_widget.dart';

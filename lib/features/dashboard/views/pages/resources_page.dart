@@ -52,7 +52,7 @@ class _ResourcesPageState extends State<ResourcesPage>
         //     ),
         //   ),
         // ),
-        title: Text(
+        title: const Text(
           'My Resources',
           style: TextStyle(
             color: Colors.black,
@@ -114,7 +114,7 @@ class _ResourcesPageState extends State<ResourcesPage>
                         );
                       },
                     ),
-                    Text('Completed'),
+                    const Text('Completed'),
                     ListView(
                       shrinkWrap: true,
                     ),

@@ -87,14 +87,14 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Payment'),
+        title: const Text('Payment'),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
@@ -270,7 +270,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                       Get.defaultDialog(
                                         title: '',
                                         content: Container(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           child: Column(
                                             children: [
                                               Image.asset(

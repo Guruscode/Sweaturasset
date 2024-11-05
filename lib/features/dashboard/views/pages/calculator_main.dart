@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:swa/core/constants/colors.dart';
 import 'package:swa/features/auth/views/pages/forgot_password.dart';
 import 'package:swa/features/dashboard/controllers/calculator_controller.dart';
+import 'package:swa/features/dashboard/views/pages/calculator_chart.dart';
 import 'package:swa/features/dashboard/views/widgets/input_field_widget.dart';
 import 'package:swa/features/dashboard/views/widgets/read_more_button.dart';
 
@@ -58,6 +59,8 @@ class _CalculatorMainState extends State<CalculatorMain> {
       Get.snackbar('Error', 'Make sure all fields are inserted', backgroundColor: Colors.red, colorText: Colors.white,);
       return;
     }
+
+    Get.to(() => const CalculatorChart());
   }
 
   @override
@@ -90,21 +93,21 @@ class _CalculatorMainState extends State<CalculatorMain> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Calculator'),
+        title: const Text('Calculator'),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: Colors.black,
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 18,
@@ -130,14 +133,14 @@ class _CalculatorMainState extends State<CalculatorMain> {
                 ),
               ),
               SizedBox(height: 10.h),
-              Text(
+              const Text(
                 'Kindly input your estimated cost for each of the expense every month',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 10.h),
-              Text(
+              const Text(
                 'If you have dependants (i.e wife, kids, sibilings) you can add them to the expenses',
                 style: TextStyle(),
               ),
@@ -253,7 +256,7 @@ class _CalculatorMainState extends State<CalculatorMain> {
                             'Mortgage/ Rents/ Tenement tax/Property or Land Taxl',
                         hintText: 'N60,000',
                         keyboardType: TextInputType.number,
-                        onChanged: _calculatorController.updatebillThree,
+                        onChanged: _calculatorController.updateBillThree,
                       ),
                       SizedBox(height: 20.h),
                     ],
@@ -298,7 +301,7 @@ class _CalculatorMainState extends State<CalculatorMain> {
                         text: 'Toiletries and household consumables',
                         hintText: 'N10, 000',
                         keyboardType: TextInputType.number,
-                        onChanged: _calculatorController.updateHouseHoldOne,
+                        onChanged: _calculatorController.updateHouseholdOne,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
@@ -306,7 +309,7 @@ class _CalculatorMainState extends State<CalculatorMain> {
                         text: 'Laundry+Household Cleaning',
                         hintText: 'N10,000',
                         keyboardType: TextInputType.number,
-                        onChanged: _calculatorController.updateHouseHoldTwo,
+                        onChanged: _calculatorController.updateHouseholdTwo,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
@@ -314,7 +317,7 @@ class _CalculatorMainState extends State<CalculatorMain> {
                         text: 'Security',
                         hintText: 'N60,000',
                         keyboardType: TextInputType.number,
-                        onChanged: _calculatorController.updateHouseHoldThree,
+                        onChanged: _calculatorController.updateHouseholdThree,
                       ),
                       SizedBox(height: 20.h),
                       TextInputField(
@@ -322,7 +325,7 @@ class _CalculatorMainState extends State<CalculatorMain> {
                         text: 'Haircut/Hairdo',
                         hintText: 'N20,000',
                         keyboardType: TextInputType.number,
-                        onChanged: _calculatorController.updateHouseHoldFour,
+                        onChanged: _calculatorController.updateHouseholdFour,
                       ),
                     ],
                   ),

@@ -69,7 +69,7 @@ class QuickPickWidget extends StatelessWidget {
                     Text(
                       model?.name ?? '',
                       style: TextStyle(
-                        fontSize: 15.sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

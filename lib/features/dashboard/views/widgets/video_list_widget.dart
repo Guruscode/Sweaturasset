@@ -63,12 +63,12 @@ class VideoListWidget extends StatelessWidget {
             ),
           ],
         ),
-        isLocked ? Icon(Icons.lock_outlined) : Container(
-          decoration: BoxDecoration(
+        isLocked ? const Icon(Icons.lock_outlined) : Container(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: blueColor,
           ),
-          child: Icon(
+          child: const Icon(
              Icons.play_arrow_rounded,
             color: Colors.white,
           ),

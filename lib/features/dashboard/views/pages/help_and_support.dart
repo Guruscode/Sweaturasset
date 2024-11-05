@@ -30,21 +30,21 @@ class _HelpandSupportPageState extends State<HelpandSupportPage>
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Help and Support'),
+        title: const Text('Help and Support'),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 color: Colors.black,
               ),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 18,
@@ -90,16 +90,16 @@ class _HelpandSupportPageState extends State<HelpandSupportPage>
                             fontWeight: FontWeight.w400,
                           ),
                           borderRadius: BorderRadius.circular(8.sp),
-                          collapsedIcon: Icon(
+                          collapsedIcon: const Icon(
                             Icons.arrow_forward_ios,
                             color: blueColor,
                           ),
                           expandedIcon: Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: blueColor,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_downward,
                               color: Colors.white,
                             ),
@@ -116,16 +116,16 @@ class _HelpandSupportPageState extends State<HelpandSupportPage>
                             fontWeight: FontWeight.w400,
                           ),
                           borderRadius: BorderRadius.circular(8.sp),
-                          collapsedIcon: Icon(
+                          collapsedIcon: const Icon(
                             Icons.arrow_forward_ios,
                             color: blueColor,
                           ),
                           expandedIcon: Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: blueColor,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_downward,
                               color: Colors.white,
                             ),
@@ -142,16 +142,16 @@ class _HelpandSupportPageState extends State<HelpandSupportPage>
                             fontWeight: FontWeight.w400,
                           ),
                           borderRadius: BorderRadius.circular(8.sp),
-                          collapsedIcon: Icon(
+                          collapsedIcon: const Icon(
                             Icons.arrow_forward_ios,
                             color: blueColor,
                           ),
                           expandedIcon: Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: blueColor,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_downward,
                               color: Colors.white,
                             ),
@@ -168,16 +168,16 @@ class _HelpandSupportPageState extends State<HelpandSupportPage>
                             fontWeight: FontWeight.w400,
                           ),
                           borderRadius: BorderRadius.circular(8.sp),
-                          collapsedIcon: Icon(
+                          collapsedIcon: const Icon(
                             Icons.arrow_forward_ios,
                             color: blueColor,
                           ),
                           expandedIcon: Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: blueColor,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_downward,
                               color: Colors.white,
                             ),
@@ -196,12 +196,12 @@ class _HelpandSupportPageState extends State<HelpandSupportPage>
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.mail_outline,
                               color: blueColor,
                             ),
                             SizedBox(width: 10.w),
-                            Text(
+                            const Text(
                               'Email',
                               style: TextStyle(
                                 color: blueColor,
@@ -211,19 +211,19 @@ class _HelpandSupportPageState extends State<HelpandSupportPage>
                           ],
                         ),
                         SizedBox(height: 20.h),
-                        Text(
+                        const Text(
                           'info@sweatyourasset.ng',
                           style: TextStyle(),
                         ),
                         SizedBox(height: 30.h),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.phone_outlined,
                               color: blueColor,
                             ),
                             SizedBox(width: 10.w),
-                            Text(
+                            const Text(
                               'Phone number',
                               style: TextStyle(
                                 color: blueColor,
@@ -233,7 +233,7 @@ class _HelpandSupportPageState extends State<HelpandSupportPage>
                           ],
                         ),
                         SizedBox(height: 20.h),
-                        Text(
+                        const Text(
                           '+234 80 999 88 273',
                           style: TextStyle(),
                         ),

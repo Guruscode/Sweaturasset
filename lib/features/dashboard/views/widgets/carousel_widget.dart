@@ -1,5 +1,5 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:swa/features/dashboard/controllers/ads_controller.dart';
@@ -26,19 +26,17 @@ class CarouselWidget extends StatelessWidget {
                   child: Shimmer.fromColors(
                     baseColor: Colors.white,
                     highlightColor: Colors.grey,
-                    child: FlutterCarousel.builder(
+                    child: CarouselSlider.builder(
                       options: CarouselOptions(
                         aspectRatio: 2.0,
                         viewportFraction: .8,
                         autoPlayCurve: Curves.fastOutSlowIn,
                         height: 400.0,
-                        showIndicator: true,
                         enlargeCenterPage: true,
                         enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                        slideIndicator: const CircularSlideIndicator(),
                       ),
                       itemCount: 3,
-                      itemBuilder: (context, index, int_two) {
+                      itemBuilder: (context, index, intTwo) {
                         return Container(
                           width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -61,19 +59,17 @@ class CarouselWidget extends StatelessWidget {
                     ),
                   ),
                 )
-              : FlutterCarousel.builder(
+              : CarouselSlider.builder(
                   options: CarouselOptions(
                     aspectRatio: 2.0,
                     viewportFraction: .8,
                     autoPlayCurve: Curves.fastOutSlowIn,
                     height: 400.0,
-                    showIndicator: true,
                     enlargeCenterPage: true,
                     enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                    slideIndicator: const CircularSlideIndicator(),
                   ),
                   itemCount: controller.ads.length,
-                  itemBuilder: (context, index, int_two) {
+                  itemBuilder: (context, index, intTwo) {
                     return Container(
                       width: MediaQuery.of(context).size.width,
                       margin: const EdgeInsets.symmetric(horizontal: 5.0),
