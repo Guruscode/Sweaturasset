@@ -50,6 +50,7 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   pay_with_paystack: ^1.0.10
   fl_chart: ^0.69.0
+  paystack_for_flutter: ^1.0.2
 
 dev_dependencies:
   flutter_test:

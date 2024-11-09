@@ -246,89 +246,91 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                     const LoadingWidget():
                                   ButtonWidget(
                                   bgColor: blueColor,
-                                  onPressed: () async {
-                                    var res = await controller.purchaseCourse(
-                                      courseId: widget.course.id.toString(),
-                                      userId: user.user.value.id.toString(),
+                                  onPressed: ()  {
+                                   controller.processWithPayStack(
+                                      context, double.parse(widget.course.price!), user.user.value.email!, widget.course.id!, user.user.value.id!
                                     );
-                                    if (res == 'purchased') {
-                                      Get.snackbar(
-                                        'Error',
-                                        'Already purchased',
-                                        backgroundColor: Colors.red,
-                                        colorText: Colors.white,
-                                      );
-                                    }else if(res == 'error') {
-                                      Get.snackbar(
-                                        'Error',
-                                        'Something went wrong',
-                                        backgroundColor: Colors.red,
-                                        colorText: Colors.white,
-                                      );
-                                    }else {
-                                      user.fetchUserCourses();
-                                      Get.defaultDialog(
-                                        title: '',
-                                        content: Container(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Column(
-                                            children: [
-                                              Image.asset(
-                                                'assets/images/done.png',
-                                                scale: 2.0,
-                                              ),
-                                              Text(
-                                                'Congratulations',
-                                                style: GoogleFonts.jost(
-                                                  color: const Color(
-                                                      0xff202244),
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 18.sp,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 5.h,
-                                              ),
-                                              Text(
-                                                'Your payment was successful',
-                                                style: GoogleFonts.jost(
-                                                  fontSize: 14.sp,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 10.h,
-                                              ),
-                                              Text(
-                                                'View receipt',
-                                                style: GoogleFonts.jost(
-                                                  color: const Color(
-                                                      0xff219653),
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 15.sp,
-                                                  decoration: TextDecoration
-                                                      .underline,
-                                                  decorationColor: const Color(
-                                                      0xff219653),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 10.h,
-                                              ),
-                                              ButtonWidget(
-                                                bgColor: const Color(
-                                                    0xff219653),
-                                                onPressed: () {
-                                                  Get
-                                                      .offAll(() => const AppBottomBar(),);
-                                                },
-                                                text: " Proceed to Learn",
-                                                textColor: Colors.white,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }
+                                    // if (res == 'purchased') {
+                                    //   Get.snackbar(
+                                    //     'Error',
+                                    //     'Already purchased',
+                                    //     backgroundColor: Colors.red,
+                                    //     colorText: Colors.white,
+                                    //   );
+                                    // }else if(res == 'error') {
+                                    //   Get.snackbar(
+                                    //     'Error',
+                                    //     'Something went wrong',
+                                    //     backgroundColor: Colors.red,
+                                    //     colorText: Colors.white,
+                                    //   );
+                                    // }else {
+                                    //   controller.processWithPayStack(
+                                    //     context, double.parse(widget.course.price!), user.user.value.email!
+                                    //   );
+                                    //   user.fetchUserCourses();
+                                    //   Get.defaultDialog(
+                                    //     title: '',
+                                    //     content: Container(
+                                    //       padding: const EdgeInsets.all(10),
+                                    //       child: Column(
+                                    //         children: [
+                                    //           Image.asset(
+                                    //             'assets/images/done.png',
+                                    //             scale: 2.0,
+                                    //           ),
+                                    //           Text(
+                                    //             'Congratulations',
+                                    //             style: GoogleFonts.jost(
+                                    //               color: const Color(
+                                    //                   0xff202244),
+                                    //               fontWeight: FontWeight.w600,
+                                    //               fontSize: 18.sp,
+                                    //             ),
+                                    //           ),
+                                    //           SizedBox(
+                                    //             height: 5.h,
+                                    //           ),
+                                    //           Text(
+                                    //             'Your payment was successful',
+                                    //             style: GoogleFonts.jost(
+                                    //               fontSize: 14.sp,
+                                    //             ),
+                                    //           ),
+                                    //           SizedBox(
+                                    //             height: 10.h,
+                                    //           ),
+                                    //           Text(
+                                    //             'View receipt',
+                                    //             style: GoogleFonts.jost(
+                                    //               color: const Color(
+                                    //                   0xff219653),
+                                    //               fontWeight: FontWeight.w600,
+                                    //               fontSize: 15.sp,
+                                    //               decoration: TextDecoration
+                                    //                   .underline,
+                                    //               decorationColor: const Color(
+                                    //                   0xff219653),
+                                    //             ),
+                                    //           ),
+                                    //           SizedBox(
+                                    //             height: 10.h,
+                                    //           ),
+                                    //           ButtonWidget(
+                                    //             bgColor: const Color(
+                                    //                 0xff219653),
+                                    //             onPressed: () {
+                                    //               Get
+                                    //                   .offAll(() => const AppBottomBar(),);
+                                    //             },
+                                    //             text: " Proceed to Learn",
+                                    //             textColor: Colors.white,
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //     ),
+                                    //   );
+                                    // }
                                   },
                                   text: 'Proceed to Pay',
                                   textColor: Colors.white,

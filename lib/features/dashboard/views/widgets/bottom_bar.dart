@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:swa/core/constants/colors.dart';
+import 'package:swa/features/dashboard/views/pages/calculator_intro.dart';
 import 'package:swa/features/dashboard/views/pages/calculator_page.dart';
 import 'package:swa/features/dashboard/views/pages/home_page.dart';
 import 'package:swa/features/dashboard/views/pages/resources_page.dart';
@@ -30,7 +31,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
     return [
       const HomePage(),
       const ResourcesPage(),
-      const CalculatorPage(),
+      const CalculatorIntro(),
       const SettingsPage(),
     ];
   }

@@ -20,25 +20,25 @@ class _CalculatorIntroState extends State<CalculatorIntro> {
         backgroundColor: Colors.white,
         title: const Text('Calculator'),
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Container(
-            padding: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.black,
-              ),
-            ),
-            child: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 18,
-            ),
-          ),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        //   icon: Container(
+        //     padding: const EdgeInsets.all(5),
+        //     decoration: BoxDecoration(
+        //       shape: BoxShape.circle,
+        //       border: Border.all(
+        //         color: Colors.black,
+        //       ),
+        //     ),
+        //     child: const Icon(
+        //       Icons.arrow_back,
+        //       color: Colors.black,
+        //       size: 18,
+        //     ),
+        //   ),
+        // ),
       ),
       body: SingleChildScrollView(
         child: Padding(
